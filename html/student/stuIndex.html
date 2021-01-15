@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>首页</title>
+	</head>
+	<link rel="stylesheet" type="text/css" href="../../static/layui-v2.5.6/layui/css/layui.css"/>
+	<link rel="stylesheet" type="text/css" href="../../static/css/teaindex.css"/>
+	<script src="../../static/js/jquery.min.js"></script>
+	<script src="../../static/layui-v2.5.6/layui/layui.js"></script>
+	<script src="../../static/js/student/stuIndex.js"></script>
+	<script src="../../static/js/common/ajax.js"></script>
+	<script src="../../static/js/common/tips.js"></script>
+	<script src="../../static/js/md5.js"></script>
+	<body class="layui-layout-body">
+		<div class="layui-layout layui-layout-admin">
+			<div class="layui-header layui-bg-cyan">
+				<div class="layui-logo">在线考试系统</div>
+				<ul class="layui-nav layui-layout-left " >
+				  <li class="layui-nav-item"><a onclick="showSubjects()">课程管理</a></li>
+				  <li class="layui-nav-item"><a onclick="apply()">课程申请</a></li>
+				  <li class="layui-nav-item"><a href="" target="mainFrame">题库系统</a></li>
+				  
+				</ul>
+				<ul class="layui-nav layui-layout-right">
+					<li class="layui-nav-item"><div><marquee direction="left" behavior="scroll" scrollamount="1" onmouseover="this.stop();" onmouseout="this.start();" scrolldelay="0" loop="-1" width="400px" height="40px" id="alarm"></marquee><div></li>
+					<li class="layui-nav-item">&nbsp;&nbsp;&nbsp;&nbsp;</li>
+					<li class="layui-nav-item" id="specialtyName"></li>
+					<li class="layui-nav-item">&nbsp;&nbsp;&nbsp;&nbsp;</li>
+					<li class="layui-nav-item">
+						<img src="../../static/img/head/defaultHead.jpg" id="viewHead" style="width:30px;height:30px;border-radius:50%;" onfocus="getUsername()"/>
+						<dl class="layui-nav-child">
+							<dd><a id="username"></a></dd>
+							<dd><a onclick="changeMsg()">修改信息</a></dd>
+						</dl>
+					</li>
+					<li class="layui-nav-item"><a onclick="logout()">退出</a></li>
+				</ul>
+			</div>
+			<div class="layui-side layui-bg-cyan">
+				<div class="layui-side-scroll">
+					<ul class="layui-nav layui-nav-tree" lay-filter="test">
+					<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+					  <li class="layui-nav-item"><a href="/exam/html/main.html" target="mainFrame">首页</a></li>
+					  <li class="layui-nav-item layui-nav-itemed">
+					    <a href="javascript:;">考试配置</a>
+					    <dl class="layui-nav-child">
+					      <dd><a href="addExam.html" target="mainFrame">添加考试</a></dd>
+					      <dd><a href="examList.html" target="mainFrame">查看考试</a></dd>
+					    </dl>
+					  </li>
+					  <li class="layui-nav-item"><a href="" target="mainFrame">批改试卷</a></li>
+					  <li class="layui-nav-item"><a href="" target="mainFrame">查看成绩</a></li>
+					</ul>
+				</div>
+			</div>
+			<div style="display: none;" id="subjectList">
+				<div>
+					<table class="layui-table" >
+						<colgroup>
+							<col width="150">
+							<col width="150">
+							<col width="150" />
+						</colgroup>
+						<thead>
+							<tr>
+								<th>课程编号</th>
+								<th>课程名称</th>
+								<th>教师名称</th>
+							</tr>
+						</thead>
+						<tbody id="specialty">
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div style="display: none;" id="chooseSubject">
+				<div>
+					<table class="layui-table">
+						<colgroup>
+							<col width="150" />
+							<col width="150" />
+							<col width="150" />
+							<col width="100" />
+						</colgroup>
+						<thead>
+							<tr>
+								<th>课程编号</th>
+								<th>课程名称</th>
+								<th>教师名称</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody id="specialty1"></tbody>
+					</table>
+				</div>
+				<div id="search" style="float: right;"></div>
+			</div>
+			<div class='layui-form' style="display: none;" id="add-main">
+			  <div class='layui-form-item'>
+			    <label class='layui-form-label'>头像</label>
+			    <div class='layui-input-block'>
+					<input type="file" id="headPic" style="display: none;" accept="image/jpg,image/jpeg,image/png,image/PNG" onchange="showHead(this)"/>
+					<img src='../../static/img/head/defaultHead.jpg' style='width:50px;height:50px;border-radius:50%;' onclick="headPic.click()" id="disHead"/>
+			    </div>
+			  </div>
+			  <div class='layui-form-item'>
+			    <label class='layui-form-label'>用户名</label>
+			    <div class='layui-input-inline'>
+			      <input type='text' name='username' required lay-verify='required' autocomplete='off' class='layui-input' id="changeUsername" />
+			    </div>
+			  </div>
+			  <div class='layui-form-item'>
+			    <label class='layui-form-label'>旧密码</label>
+			    <div class='layui-input-inline'>
+			      <input type='password' name='password' required lay-verify='required' autocomplete='off' class='layui-input' id="oldPassword" onblur="checkPassword(this.value)"/>
+			    </div>
+				<div class="layui-form-mid layui-word-aux" id="warn"></div>
+			  </div>
+			  <div class='layui-form-item'>
+			    <label class='layui-form-label'>新密码</label>
+			    <div class='layui-input-inline'>
+			      <input type='password' name='password' required lay-verify='required' autocomplete='off' class='layui-input' id="changePassword" />
+			    </div>
+			  </div>
+			  <div class='layui-form-item'>
+			    <label class='layui-form-label'>姓名</label>
+			    <div class='layui-input-inline'>
+					<input type='name' name='name' required lay-verify='required' autocomplete='off' class='layui-input' id = "changeName" />
+				</div>
+			  </div>
+			  <div class="layui-form-item">
+				  <div class="layui-input-block">
+					  <button class="layui-btn layui-btn-disabled" lay-submit lay-filter="save" id="submit" onclick="updateUser()">立即提交</button>
+					  <button type="reset" class="layui-btn layui-btn-primary" id="closeBtn" onclick="resetParam()">重置</button>
+				  </div>
+			  </div>
+			</div>
+			<div class="layui-body">
+			    <!-- 内容主体区域 -->
+			    <div style="padding: 0px;">
+			    	<iframe name="mainFrame" width="100%" style="height: 614px;" src="/exam/html/main.html" frameborder="no" border="0" marginwidth="0" marginheight="0"  allowtransparency="yes"></iframe>
+			    </div>
+			</div>
+			<div class="layui-footer" style="background-color: #2F4056; height: 48px;">
+				© ggboy-荣誉出品
+			</div>
+		</div>
+		
+		<script>
+		layui.use('element', function(){
+		  var element = layui.element;
+		});
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Kodinger">
+	<title>登录界面</title>
+	<link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/my-login.css">
+	<link rel="stylesheet" type="text/css" href="../static/layui-v2.5.6/layui/css/layui.css"/>
+	<script src="../static/layui-v2.5.6/layui/layui.js"/>
+	<script src="../static/js/vue.js"></script>
+	<script src="../static/js/jquery.min.js"></script>
+	<script src="../static/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../static/js/auth/my-login.js"></script>
+	<script src="../static/js/md5.js"></script>
+</head>
+<body class="my-login-page">
+	<section class="h-100">
+		<div class="container h-100">
+			<div class="row justify-content-md-center h-100">
+				<div class="card-wrapper">
+					<div class="brand">
+						<img src="../static/img/logo.jpg">
+					</div>
+					<div class="card fat">
+						<div class="card-body">
+							<h4 class="card-title">登录</h4>
+							<form method="POST" action="http://localhost:8080/auth/tea/login">
+								<div class="form-group">
+									<label for="username">用户名</label><b style="color: red" id="errmsg" style="float: right;"></b>
+									<input id="username" type="text" class="form-control" name="username" placeholder="请输入用户名..." required autofocus>
+								</div>
+								<div class="form-group">
+									<label for="password">密码
+										<a href="/forgot" class="float-right">
+											忘记密码？
+										</a>
+									</label>
+									<input id="password" type="password" class="form-control" name="password" required data-eye>
+								</div>
+								<div class="form-group">
+									<label>验证码</label>
+									<input id="code" type="text" class="form-control" name="code" style="width: 70%; float: left;">
+									<img src="http://localhost:8181/auth/getVerifiCode" class="codeImg" style="width: 30%; float: right;padding-bottom: 30px;" onclick="this.src='http://localhost:8181/auth/getVerifiCode?'+Math.random()">
+								</div>
+								<div class="form-group">
+									<input type="radio" id="change1" name="post" value="teacher" title="教师" checked="true" onclick="changeOne()"/>教师
+									<input type="radio" id="change2" name="post" value="student" title="学生" onclick="changeTwo()"/>学生
+								</div>
+								<div class="form-group no-margin">
+									<button type="button" id="submit" name="submit" value="teacher" class="btn btn-primary btn-block" onclick="doLogin1()" >
+										登录
+									</button>
+								</div>
+								<div class="margin-top20 text-center">
+									没有账号？ <a href="register.html">点击注册</a>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="footer">
+						Copyright &copy; ggboy88 2020 - More Templates <a href="http://www.ggboy88.com/" target="_blank" title="在线考试系统">在线考试系统</a> - Collect from <a href="http://www.cssmoban.com/" title="ggboy" target="_blank">ggboy</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

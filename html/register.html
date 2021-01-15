@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Kodinger">
+	<title>学生注册界面</title>
+	<link rel="stylesheet" type="text/css" href="../static/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/my-login.css">
+	<link rel="stylesheet" type="text/css" href="../static/layui-v2.5.6/layui/css/layui.css">
+	<script src="../static/js/jquery.min.js"></script>
+	<script src="../static/js/auth/register.js"></script>
+</head>
+<body class="my-login-page">
+	<section class="h-100">
+		<div class="container h-100">
+			<div class="row justify-content-md-center h-100">
+				<div class="card-wrapper">
+					<div class="brand">
+						<img src="../static/img/logo.jpg">
+					</div>
+					<div class="card fat">
+						<div class="card-body">
+							<h3 class="card-title" style="">学生注册</h3>
+							<form method="POST" action="/user/regist" >
+								<div class="form-group">
+									<label for="phone">手机号</label>
+									<input id="phone" type="text" class="form-control" name="phone" required autofocus>
+									<div id="font"></div>
+								</div>
+								<div class="form-group">
+									<label for="username">姓名</label>
+									<input id="username" type="text" class="form-control" name="username" required autofocus>
+								</div>
+								<div class="form-group">
+									<label for="specialty">学院</label>
+									<select id="specialty" name="specialty" style="width: 335px;height:30px;border-radius: 3px;-webkit-border-radius: 3px;-moz-border-radius: 3px;color: gray;border-color: grey">
+										<option value="">请选择学院</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="password">密码</label>
+									<input id="password" type="password" class="form-control" name="password" required data-eye>
+								</div>
+								<div class="form-group">
+									<label>
+										<input type="checkbox" name="agree" value="1" id="checkBox">&nbsp;<a href="ggboyIsDashing.html">我同意这些条款</a>
+									</label>
+								</div>
+								<div class="form-group no-margin">
+									<input type="button" id="submit" class="btn btn-primary btn-block" value="注册" disabled="disabled" onclick="register()">
+									<div id="font1"></div>
+								</div>
+								<script>
+									$("#checkBox").click(function () {
+										if ($(this).prop("checked")){
+											$(":button").removeAttr("disabled");
+										}else {
+											$(":button").attr("disabled","disabled");
+											$("#font1").text("请先同意用户条款！").prop("color","red");
+										}
+									})
+								</script>
+								<div class="margin-top20 text-center">
+									已有账号？ <a href="login.html">登录</a>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="footer">
+						Copyright &copy; ggboy 2020 - More Templates <a href="http://www.ggboy88.com/" target="_blank" title="ggboy88">ggboy88</a> - Collect from <a href="#" title="在线考试系统" target="_blank">ggoby88</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>考试管理界面</title>
+	</head>
+	<link rel="stylesheet" type="text/css" href="../../static/layui-v2.5.6/layui/css/layui.css"/>
+	<script src="../../static/js/jquery.min.js"></script>
+	<script src="../../static/layui-v2.5.6/layui/layui.js"></script>
+	<script src="../../static/js/common/ajax.js"></script>
+	<script src="../../static/js/common/tips.js"></script>
+	<script src="../../static/js/teacher/examList.js"></script>
+	<body background="../../static/img/背景.jpeg" style=" background-repeat:no-repeat ; background-size:100% 100%;background-attachment: fixed;">
+		<div class="layui-row" style="text-align: center; margin-bottom: auto;">
+			<div class="layui-form">
+				<div class="layui-input-inline">
+					<div class="layui-form-item">
+						<input type="text" placeholder="请输入课程名称" class="layui-input" style="width: 135px; height: 38px;" id="courseName" />
+					</div>
+				</div>
+				<div class="layui-input-inline">
+					<div class="layui-form-item">
+						<input type="text" placeholder="请输入试卷编号" class="layui-input" style="width: 135px; height: 38px;" id="paperId" />
+					</div>
+				</div>
+				<div class="layui-input-inline">
+					<div class="layui-form-item">
+						<input type="text" class="layui-input" id="examTime" placeholder="请选择考试时间段" style="width: 135px; height: 38px;vertical-align: middle;" />
+					</div>
+				</div>
+				<div class="layui-input-inline" id="status" style="width: 135px; height: 10px;display: inline-block;vertical-align: top;">
+					<div class="layui-form-item">
+						<select style="border-radius: 5px;vertical-align: middle;">
+							<option value="">请选择考试状态</option>
+							<option value="pending">待考试</option>
+							<option value="processing">考试中</option>
+							<option value="end">已结束</option>
+						</select>
+					</div>
+				</div>
+				<div class="layui-input-inline">
+					<div class="layui-form-item">
+						<button type="button" class="layui-btn layui-btn-sm" onclick="searchByExample()">查询</button>
+						<button type="button" class="layui-btn layui-btn-sm layui-btn-warm" onclick="resetExample()">重置</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="layui-row">
+			<table class="layui-table">
+				<colgroup>
+					<col width="100px" />
+					<col width="150px" />
+					<col width="150px" />
+					<col width="100px" />
+					<col width="100px" />
+					<col width="150px" />
+				</colgroup>
+				<thead>
+					<tr>
+						<th>课程名称</th>
+						<th>开始时间</th>
+						<th>结束时间</th>
+						<th>试卷编号</th>
+						<th>考试状态</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody id="examList"></tbody>
+			</table>
+		</div>
+		<div id="search" style="float: right;"></div>
+		<script>
+		layui.use('layer', function(){
+		 var layer = layui.layer;
+		});
+		layui.use("laydate",function(){
+			var laydate = layui.laydate;
+			laydate.render({
+				elem:"#examTime",
+				type:"datetime",
+				format:"yyyy-MM-dd HH:mm:ss",
+				range:"~"
+			})
+		});
+		layui.use('form', function(){
+		  var form = layui.form;
+		  
+		  //监听提交
+		  form.on('submit(formDemo)', function(data){
+		    layer.msg(JSON.stringify(data.field));
+		    return false;
+		  });
+		});
+		</script>
+	</body>
+</html>

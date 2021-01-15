@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<link rel="stylesheet" type="text/css" href="../../static/layui-v2.5.6/layui/css/layui.css"/>
+	<script src="../../static/js/jquery.min.js"></script>
+	<script src="../../static/layui-v2.5.6/layui/layui.js"></script>
+	<script src="../../static/js/common/ajax.js"></script>
+	<script src="../../static/js/common/tips.js"></script>
+	<script src="../../static/js/teacher/addExam.js"></script>
+	<body  background="../../static/img/背景.jpeg" style=" background-repeat:no-repeat ; background-size:100% 100%;background-attachment: fixed;">
+		<ul class="layui-timeline">
+		  <li class="layui-timeline-item">
+		    <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+		    <div class="layui-timeline-content layui-text">
+		      <h3 class="layui-timeline-title">一、课程选择</h3>
+			  <div class="layui-form">
+				  <div class="layui-inline">
+					<div class="layui-form-item">
+						<select id="courses" lay-verify="" lay-filter="courses">
+							<option value="">请选择考试课程</option>
+						</select> 
+					</div>  
+				  </div>
+				  
+			  </div>
+		    </div>
+		  </li>
+		  <li class="layui-timeline-item">
+		    <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+		    <div class="layui-timeline-content layui-text">
+		      <h3 class="layui-timeline-title">二、试卷选择</h3>
+			  <input style="display: none;" type="text" id="paperId" value="" />
+			  <span style="color: #003EFF;" id="showPaperId"></span><br />
+			  <div class="layui-inline">
+				<table class="layui-table" lay-size="sm">
+					<colgroup>
+						<col width="150">
+						<col width="150">
+						<col width="150">
+						<col width="100"/>
+						<col width="100"/>
+						<col width="100"/>
+					</colgroup>
+					<thead>
+						<tr>
+							<th>试卷编号</th>
+							<th>试卷科目</th>
+							<th>创建人</th>
+							<th>创建时间</th>
+							<th>难度</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody id="paperInfo">
+									  
+					</tbody>
+				</table>
+				<div id="search" style="float: right;"></div>
+			  </div>
+		    </div>
+		  </li>
+		  <li class="layui-timeline-item">
+		    <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+		    <div class="layui-timeline-content layui-text">
+		      <h3 class="layui-timeline-title">三、考试时间</h3>
+		      <div class="layui-form">
+				  <div class="layui-inline">
+					  <div class="layui-form-item">
+						  <input type="text" class="layui-input" id="examTime" placeholder="请选择考试时间段" />
+					  </div>
+				  </div>
+			  </div>
+		    </div>
+		  </li>
+		  <li class="layui-timeline-item">
+		    <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+		    <div class="layui-timeline-content layui-text">
+		      <h3 class="layui-timeline-title">四、提交</h3>
+			  <div class="layui-inline">
+				<button type="button" class="layui-btn" onclick="submitExam()">提交</button>
+			  </div>
+		    </div>
+		  </li>
+		</ul>
+		<div style="display: none;" id="paperDetails">
+			<b>选择题</b>
+			<table class="layui-table" lay-skin="row">
+				<thead>
+					<tr>
+						<th>问题</th>
+						<th>选项A</th>
+						<th>选项B</th>
+						<th>选项C</th>
+						<th>选项D</th>
+						<th>答案</th>
+					</tr>
+				</thead>
+				<tbody id="choiceQsts"></tbody>
+			</table>
+			<br />
+			<b>判断题</b>
+			<table class="layui-table">
+				<thead>
+					<tr>
+						<th>问题</th>
+						<th>答案</th>
+					</tr>
+				</thead>
+				<tbody id="tofQsts"></tbody>
+			</table>
+			<br />
+			<b>简答题</b>
+			<table class="layui-table">
+				<thead>
+					<tr>
+						<th>问题</th>
+						<th>答案</th>
+					</tr>
+				</thead>
+				<tbody id="designQsts"></tbody>
+			</table>
+			<br />
+			<b>应用题</b>
+			<table class="layui-table">
+				<thead>
+					<tr>
+						<th>问题</th>
+						<th>答案</th>
+					</tr>
+				</thead>
+				<tbody id="bigQsts"></tbody>
+			</table>
+		</div>
+		<script>
+		//Demo
+		layui.use('form', function(){
+		  var form = layui.form;
+		  
+		  //监听提交
+		  form.on('submit(formDemo)', function(data){
+		    layer.msg(JSON.stringify(data.field));
+		    return false;
+		  });
+		});
+		
+		layui.use("laydate",function(){
+			var laydate = layui.laydate;
+			laydate.render({
+				elem:"#examTime",
+				type:"datetime",
+				format:"yyyy-MM-dd HH:mm:ss",
+				range:"~"
+			})
+		});
+		</script>
+	</body>
+</html>
