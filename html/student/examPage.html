@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<link rel="stylesheet" type="text/css" href="../../static/layui-v2.5.6/layui/css/layui.css"/>
+	<script src="../../static/js/jquery.min.js"></script>
+	<script src="../../static/layui-v2.5.6/layui/layui.js"></script>
+	<script src="../../static/js/common/ajax.js"></script>
+	<script src="../../static/js/common/tips.js"></script>
+	<script src="../../static/js/student/examPage.js"></script>
+	<body  background="../../static/img/背景.jpeg" style=" background-repeat:no-repeat ; background-size:100% 100%;background-attachment: fixed;">
+		<div>
+			<div class="layui-progress">
+			  <div class="layui-progress-bar" lay-percent="0%"></div>
+			</div>
+			<div style="font-size: 20px; text-align: center;">距离考试结束还有：<span id="overTime" style="color: red;"></span></div>
+			<div><button type="button" class="layui-btn layui-btn-lg" style="float: right;" onclick="submit()">提交</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+			<div class="layui-tab">
+				<ul class="layui-tab-title">
+				    <li class="layui-this">选择题</li>
+				    <li>判断题</li>
+				    <li>简答题</li>
+				    <li>应用题</li>
+				</ul>
+				<div class="layui-tab-content">
+				    <div class="layui-tab-item layui-show">
+						<form class="layui-form"  id="choiceQsts" style="font-size: 20px;"></form>
+					</div>
+				    <div class="layui-tab-item">
+						<form class="layui-form"  id="tofQsts" style="font-size: 20px;"></form>
+					</div>
+				    <div class="layui-tab-item">
+						<form class="layui-form"  id="designQsts" style="font-size: 20px;"></form>
+					</div>
+				    <div class="layui-tab-item">
+						<form class="layui-form"  id="bigQsts" style="font-size: 20px;"></form>
+					</div>
+				  </div>
+			</div>
+		</div>
+		<script>
+		//Demo
+		layui.use('form', function(){
+		  var form = layui.form;
+		  
+		  //监听提交
+		  form.on('submit(formDemo)', function(data){
+		    layer.msg(JSON.stringify(data.field));
+		    return false;
+		  });
+		});
+		</script>
+	</body>
+</html>

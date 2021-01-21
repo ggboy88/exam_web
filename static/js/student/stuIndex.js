@@ -96,7 +96,6 @@ $(document).ready(function(){
 	})
 	
 	sendAjax("http://localhost:8181/stu/getAlarm",null,"GET",function(res){
-		console.log(res);
 		if(res.data !== null){
 			$("#alarm").text(res.data);
 		}
@@ -200,7 +199,6 @@ function showSubjects(){
 function showHead(obj){
 	var file = obj.files[0];
 	var url = URL.createObjectURL(file);
-	console.log(url);
 	$("#disHead").attr("src",url);
 	var formData = new FormData();
 	formData.append("file",file);
@@ -220,7 +218,6 @@ function showHead(obj){
 	    dataType: 'text',
 	    success: function(data) {
 	    var params = JSON.parse(data);
-		console.log(params);
 	    }
 	});
 }

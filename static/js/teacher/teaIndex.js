@@ -110,3 +110,4 @@ function resetParam(){
 	$("#changeUsername").val("");
 	$("#changeName").val("");
 }
+
